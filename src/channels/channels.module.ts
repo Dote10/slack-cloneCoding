@@ -20,5 +20,6 @@ import { ChannelMembers } from 'src/channels/entities/ChannelMembers';
   ],
   controllers: [ChannelsController],
   providers: [ChannelsService],
+  exports:[TypeOrmModule]
 })
 export class ChannelsModule {}

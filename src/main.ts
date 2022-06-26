@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ModuleCompiler } from '@nestjs/core/injector/compiler';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { createConnection } from 'typeorm';
 
 declare const module: any;
 
@@ -18,6 +19,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   const PORT = process.env.PORT;
+
   await app.listen(PORT);
 
   if (module.hot) {

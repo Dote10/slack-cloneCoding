@@ -17,7 +17,8 @@ import { Mentions } from './entities/Mentions';
       WorkspaceMembers,
       ChannelMembers,
     ])
-  ]
+  ],
+  exports:[TypeOrmModule]
 
 })
 export class MentionsModule {}

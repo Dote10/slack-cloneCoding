@@ -1,6 +1,5 @@
 import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
 import { ChannelChats } from './src/channels/entities/ChannelChats';
 import { ChannelMembers } from './src/channels/entities/ChannelMembers';
 import { Channels } from './src/channels/entities/Channels';
@@ -10,6 +9,7 @@ import { Users } from './src/users/entities/Users';
 import { WorkspaceMembers } from './src/workspaces/entities/WorkspaceMembers';
 import { Workspaces } from './src/workspaces/entities/Workspaces';
 import { ConfigService } from '@nestjs/config';
+import { TypeORMError } from 'typeorm';
 
 
 
@@ -17,7 +17,7 @@ const config:TypeOrmModuleOptions ={
   inject : [ConfigService],
   useFactory: async (configService: ConfigService) => {
     return {
-  type: 'mysql',
+  type: "mariadb",
   host: process.env.DB_HOST,
   port: 3306,
   username: process.env.DB_USERNAME,
@@ -32,20 +32,20 @@ const config:TypeOrmModuleOptions ={
     WorkspaceMembers,
     Workspaces,],
   migrations: [__dirname + '/src/migration/*.ts'],
+  seeds: ['src/seeds/**/*{.ts,.js}'],
+  factories: ['src/factories/**/*{.ts,.js}'],
   cli : { migrationsDir : 'src/migrations'},
   logging:true,
   autoLoadEntities: true,
   charset: 'utf8mb4',
   synchronize: false,
-  keepConnectionAlive:true
+  keepConnectionAlive:false
+  
   
     }
   }
 }
 
-module.exports = {
-  seeds: ['src/seeds/**/*{.ts,.js}'],
-  factories: ['src/factories/**/*{.ts,.js}'],
-}
+
 
 export = config;

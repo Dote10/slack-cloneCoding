@@ -22,5 +22,6 @@ import { Mentions } from 'src/mentions/entities/Mentions';
   ],
   providers: [WorkspacesService],
   controllers: [WorkspacesController],
+  exports:[TypeOrmModule]
 })
 export class WorkspacesModule {}

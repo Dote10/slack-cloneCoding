@@ -17,9 +17,11 @@ import { Users } from './users/entities/Users';
 import { WorkspaceMembers } from './workspaces/entities/WorkspaceMembers';
 import { Workspaces } from './workspaces/entities/Workspaces';
 import { MentionsModule } from './mentions/mentions.module';
+
+
 const getEnv = () => {
   return {
-    type: 'mysql',
+    type: 'mariadb',
     host: process.env.DB_HOST,
     port: 3306,
     username: process.env.DB_USERNAME,
@@ -52,7 +54,7 @@ const getEnv = () => {
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
         return {
-          type: 'mysql',
+          type: "mysql",
           host: process.env.DB_HOST,
           port: 3306,
           username: process.env.DB_USERNAME,
@@ -61,6 +63,8 @@ const getEnv = () => {
           entities: [],
           migrations: [__dirname + '/src/migration/*.ts'],
           cli: { migrationsDir: 'src/migrations' },
+          seeds: ['src/seeds/**/*{.ts,.js}'],
+          factories: ['src/factories/**/*{.ts,.js}'],
           logging: true,
           autoLoadEntities: true,
           charset: 'utf8mb4',
@@ -78,4 +82,5 @@ const getEnv = () => {
   controllers: [AppController],
   providers: [AppService, ConfigService],
 })
-export class AppModule {}
+export class AppModule {
+}
