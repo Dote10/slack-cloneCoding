@@ -9,17 +9,15 @@ import { Users } from './src/users/entities/Users';
 import { WorkspaceMembers } from './src/workspaces/entities/WorkspaceMembers';
 import { Workspaces } from './src/workspaces/entities/Workspaces';
 import { ConfigService } from '@nestjs/config';
-import { TypeORMError } from 'typeorm';
+import { Module } from '@nestjs/common';
 
 
 
-const config:TypeOrmModuleOptions ={
-  inject : [ConfigService],
-  useFactory: async (configService: ConfigService) => {
-    return {
-  type: "mariadb",
+export const typeConfig:TypeOrmModuleOptions ={
+  
+  type: 'mysql',
   host: process.env.DB_HOST,
-  port: 3306,
+  port: 3308,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
@@ -39,13 +37,10 @@ const config:TypeOrmModuleOptions ={
   autoLoadEntities: true,
   charset: 'utf8mb4',
   synchronize: false,
-  keepConnectionAlive:false
-  
-  
-    }
-  }
+  keepConnectionAlive:true
+   
 }
 
 
 
-export = config;
+module.exports = typeConfig;

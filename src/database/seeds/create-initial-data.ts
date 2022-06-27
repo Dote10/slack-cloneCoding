@@ -1,10 +1,10 @@
+
 import { Channels } from 'src/channels/entities/Channels';
 import { Workspaces } from 'src/workspaces/entities/Workspaces';
-import { Connection } from 'typeorm';
+import { Connection} from 'typeorm';
 import { Factory, Seeder } from 'typeorm-seeding';
 
 export class CreateInitialData implements Seeder {
-
   public async run(factory: Factory, connection: Connection): Promise<any> {
     await connection
       .createQueryBuilder()
@@ -12,12 +12,11 @@ export class CreateInitialData implements Seeder {
       .into(Workspaces)
       .values([{ id: 1, name: 'Sleact', url: 'sleact' }])
       .execute();
-
     await connection
       .createQueryBuilder()
       .insert()
       .into(Channels)
-      .values([{ id: 1, name: '일반', WorkspaceId: 1, private: false }])
+      .values([{ id: 1, name: '일반1', WorkspaceId: 1, private: false }])
       .execute();
     }
 }

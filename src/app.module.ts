@@ -21,9 +21,9 @@ import { MentionsModule } from './mentions/mentions.module';
 
 const getEnv = () => {
   return {
-    type: 'mariadb',
+    type: process.env.DB_TYPE ,
     host: process.env.DB_HOST,
-    port: 3306,
+    port: 3308,
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
@@ -56,7 +56,7 @@ const getEnv = () => {
         return {
           type: "mysql",
           host: process.env.DB_HOST,
-          port: 3306,
+          port: 3308,
           username: process.env.DB_USERNAME,
           password: process.env.DB_PASSWORD,
           database: process.env.DB_DATABASE,
@@ -69,7 +69,7 @@ const getEnv = () => {
           autoLoadEntities: true,
           charset: 'utf8mb4',
           synchronize: false,
-          keepConnectionAlive: true,
+          keepConnectionAlive: false,
         };
       },
     }),

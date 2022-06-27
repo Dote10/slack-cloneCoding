@@ -14,9 +14,10 @@ import { ChannelChats } from './ChannelChats';
 import { ChannelMembers } from './ChannelMembers';
 import { Users } from '../../users/entities/Users';
 import { Workspaces } from '../../workspaces/entities/Workspaces';
+import { channel } from 'diagnostics_channel';
 
 @Index('WorkspaceId', ['WorkspaceId'], {})
-@Entity({ schema: 'cat' })
+@Entity( { schema: 'cat' , name: 'channels' })
 export class Channels {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
