@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { retryWhen } from 'rxjs';
+import { User } from 'src/common/decorator/user.decorator';
 import { UserDto } from 'src/common/dto/user.dto';
 import { JoinRequestDto } from './dto/join.request.dto';
 import { UsersService } from './users.service';
@@ -22,7 +23,9 @@ export class UsersController {
   })
   @ApiOperation({ summary: '내정보 조회' })
   @Get()
-  getUsers(@Req() req) {}
+  getUsers(@User() user) {
+    return user;
+  }
 
   @ApiOperation({ summary: '회원가입' })
   @Post()
@@ -37,8 +40,8 @@ export class UsersController {
   })
   @ApiOperation({ summary: '로그인' })
   @Post('login')
-  login(@Req() req) {
-    return req.user;
+  login(@User() user) {
+    return user;
   }
 
   @ApiOperation({ summary: '로그아웃' })

@@ -18,10 +18,9 @@ import { WorkspaceMembers } from './workspaces/entities/WorkspaceMembers';
 import { Workspaces } from './workspaces/entities/Workspaces';
 import { MentionsModule } from './mentions/mentions.module';
 
-
 const getEnv = () => {
   return {
-    type: process.env.DB_TYPE ,
+    type: process.env.DB_TYPE,
     host: process.env.DB_HOST,
     port: 3308,
     username: process.env.DB_USERNAME,
@@ -54,7 +53,7 @@ const getEnv = () => {
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
         return {
-          type: "mysql",
+          type: 'mysql',
           host: process.env.DB_HOST,
           port: 3308,
           username: process.env.DB_USERNAME,
@@ -82,5 +81,4 @@ const getEnv = () => {
   controllers: [AppController],
   providers: [AppService, ConfigService],
 })
-export class AppModule {
-}
+export class AppModule {}
