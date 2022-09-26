@@ -8,7 +8,7 @@ import { Workspaces } from 'src/workspaces/entities/Workspaces';
 import { Mentions } from './entities/Mentions';
 
 @Module({
-  imports:[
+  imports: [
     TypeOrmModule.forFeature([
       Mentions,
       Users,
@@ -16,9 +16,8 @@ import { Mentions } from './entities/Mentions';
       Channels,
       WorkspaceMembers,
       ChannelMembers,
-    ])
+    ]),
   ],
-  exports:[TypeOrmModule]
-
+  exports: [TypeOrmModule],
 })
 export class MentionsModule {}
