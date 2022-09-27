@@ -17,6 +17,7 @@ import { Users } from './users/entities/Users';
 import { WorkspaceMembers } from './workspaces/entities/WorkspaceMembers';
 import { Workspaces } from './workspaces/entities/Workspaces';
 import { MentionsModule } from './mentions/mentions.module';
+import { AuthModule } from './auth/auth.module';
 
 
 const getEnv = () => {
@@ -78,6 +79,7 @@ const getEnv = () => {
     ChannelsModule,
     DmsModule,
     MentionsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, ConfigService],

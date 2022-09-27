@@ -10,10 +10,12 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { retryWhen } from 'rxjs';
+import { CurrentUser } from 'src/common/decorators/currentuser.decorator';
 import { UserDto } from 'src/common/dto/user.dto';
 import { UndefinedToNullInterceptor } from 'src/common/interceptors/undefinedToNull.interceptor';
 import { JoinRequestDto } from './dto/join.request.dto';
 import { UsersService } from './users.service';
+import { Users } from './entities/Users';
 
 @UseInterceptors(UndefinedToNullInterceptor)
 @ApiTags('USER')
@@ -25,7 +27,9 @@ export class UsersController {
   })
   @ApiOperation({ summary: '내정보 조회' })
   @Get()
-  getUsers(@Req() req) {}
+  getUsers(@CurrentUser() user: Users) {
+    return user;
+  }
 
   @ApiOperation({ summary: '회원가입' })
   @Post()
@@ -40,8 +44,8 @@ export class UsersController {
   })
   @ApiOperation({ summary: '로그인' })
   @Post('login')
-  login(@Req() req) {
-    return req.user;
+  login(@CurrentUser() user: Users) {
+    return user;
   }
 
   @ApiOperation({ summary: '로그아웃' })
