@@ -1,4 +1,7 @@
-import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import {
+  TypeOrmModuleAsyncOptions,
+  TypeOrmModuleOptions,
+} from '@nestjs/typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ChannelChats } from './src/channels/entities/ChannelChats';
 import { ChannelMembers } from './src/channels/entities/ChannelMembers';
@@ -11,36 +14,32 @@ import { Workspaces } from './src/workspaces/entities/Workspaces';
 import { ConfigService } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 
-
-
-export const typeConfig:TypeOrmModuleOptions ={
-  
+export const typeConfig: TypeOrmModuleOptions = {
   type: 'mysql',
   host: process.env.DB_HOST,
-  port: 3306,
+  port: 3307,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  entities: [ ChannelChats,
+  entities: [
+    ChannelChats,
     ChannelMembers,
     Channels,
     DMs,
     Mentions,
     Users,
     WorkspaceMembers,
-    Workspaces,],
+    Workspaces,
+  ],
   migrations: [__dirname + '/src/migration/*.ts'],
   seeds: ['src/seeds/**/*{.ts,.js}'],
   factories: ['src/factories/**/*{.ts,.js}'],
-  cli : { migrationsDir : 'src/migrations'},
-  logging:true,
+  cli: { migrationsDir: 'src/migrations' },
+  logging: true,
   autoLoadEntities: true,
   charset: 'utf8mb4',
   synchronize: false,
-  keepConnectionAlive:true
-   
-}
-
-
+  keepConnectionAlive: true,
+};
 
 module.exports = typeConfig;

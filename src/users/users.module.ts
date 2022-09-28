@@ -9,10 +9,15 @@ import { UsersService } from './users.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Users, ChannelMembers, WorkspaceMembers, Mentions]),
+    TypeOrmModule.forFeature([
+      Users,
+      ChannelMembers,
+      WorkspaceMembers,
+      Mentions,
+    ]),
   ],
   controllers: [UsersController],
   providers: [UsersService],
-  exports: [UsersModule,TypeOrmModule],
+  exports: [UsersService, TypeOrmModule],
 })
 export class UsersModule {}

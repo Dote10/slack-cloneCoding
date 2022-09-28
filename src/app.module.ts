@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -17,13 +17,14 @@ import { Users } from './users/entities/Users';
 import { WorkspaceMembers } from './workspaces/entities/WorkspaceMembers';
 import { Workspaces } from './workspaces/entities/Workspaces';
 import { MentionsModule } from './mentions/mentions.module';
-
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
 
 const getEnv = () => {
   return {
-    type: process.env.DB_TYPE ,
+    type: 'mariadb',
     host: process.env.DB_HOST,
-    port: 3306,
+    port: 3307,
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
@@ -54,9 +55,9 @@ const getEnv = () => {
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
         return {
-          type: "mysql",
+          type: 'mysql',
           host: process.env.DB_HOST,
-          port: 3306,
+          port: 3307,
           username: process.env.DB_USERNAME,
           password: process.env.DB_PASSWORD,
           database: process.env.DB_DATABASE,
@@ -78,9 +79,9 @@ const getEnv = () => {
     ChannelsModule,
     DmsModule,
     MentionsModule,
+    forwardRef(() => AuthModule),
   ],
   controllers: [AppController],
-  providers: [AppService, ConfigService],
+  providers: [AppService, ConfigService, AuthService],
 })
-export class AppModule {
-}
+export class AppModule {}
